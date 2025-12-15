@@ -1,0 +1,14 @@
+{% extends 'food/base.html'%}
+
+    {% block body  %}
+    {%for item in item_list%}
+        <li>
+            <ul>
+                <a href="{% url 'food:details' item.id%}">{{item.id}}--{{item.item_name}}</a>
+            </ul>       
+    </li>
+    {%endfor%}  
+{%endblock%}
+
+
+      
