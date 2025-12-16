@@ -1,0 +1,7 @@
+{%extends 'food/base.html' %}
+{%block body%}
+<form method="POST">
+    {%csrf_token%}
+    <button type="submit">confirm Delete</button>
+</form>
+{%endblock%}
