@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Item
 from .forms  import Itemform
+from django.views.generic import CreateView,DetailView
+
+from django.urls import reverse_lazy
 # Create your views here.
 
 
@@ -12,19 +15,21 @@ def index(request):
     }
     return render(request,"food\index.html",context)
 
-def details(request,item_id):
-    item=Item.objects.get(pk=item_id)
-    context={
-        "item":item,
-    }
-    return render(request,"food\details.html",context)
+class details(DetailView):
+    model=Item
+    template_name="food\details.html"
 
-def create_item(request):
-    form=Itemform(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect(to="food:index")
-    return render(request,"food\item_form.html",{"form":form})
+
+class create_item(CreateView):
+    model = Item
+    fields = [ 'item_name', 'item_desc', 'item_price', 'item_image']
+    template_name = 'food/item_form.html'
+
+    def form_valid(self, form):
+        form.instance.user_name=self.request.user
+        return super().form_valid(form)
+   
+
 
 def update_item(request,id):
     item=Item.objects.get(pk=id)

@@ -7,9 +7,10 @@
                 <img class="card" height="350px" width="350px" src="{{item.item_image}}" >
             </div>
             <div class="col-md-4 ">
-                <h3>{{item.item_name}}</h3>
-                <h3>{{item.item_desc}}</h3>
-                <h3>{{item.item_price}} Rs</h3>
+                <h3>{{object.user_name}}</h3>
+                <h3>{{object.item_name}}</h3>
+                <h3>{{object.item_desc}}</h3>
+                <h3>{{object.item_price}} Rs</h3>
             </div>
             <div class="col-md-1 ">
                 <a href="{% url 'food:details' item.id%}" class="btn btn-success">Details</a>
